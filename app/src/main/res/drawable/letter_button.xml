@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/letterbuttonbackgroundcolor"></solid>
+            <corners android:radius="@dimen/letterbuttoncornerradius"></corners>
+            <stroke android:width="@dimen/letterbuttonborderwidth"></stroke>
+            <stroke android:color="@color/letterbuttonbordercolor"></stroke>
+        </shape>
+    </item>
+
+</selector>

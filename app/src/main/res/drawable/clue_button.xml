@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/cluebuttonbackgroundcolor"></solid>
+            <corners android:radius="@dimen/cluebuttoncornerradius"></corners>
+            <stroke android:width="@dimen/cluebuttonborderwidth"></stroke>
+            <stroke android:color="@color/cluebuttonbordercolor"></stroke>
+        </shape>
+    </item>
+</selector>

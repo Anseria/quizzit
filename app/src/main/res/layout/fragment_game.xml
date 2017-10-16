@@ -1,0 +1,484 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/gameFragmentConstraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/myblack"
+    tools:context="joneros.jenny.quizzit.GameFragment"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="81dp">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <Button
+        android:id="@+id/set1"
+        android:layout_width="@dimen/letterbuttonanswerheight"
+        android:layout_height="@dimen/letterbuttonanswerheight"
+        android:layout_marginStart="@dimen/letterbuttonmarginleft"
+        android:alpha="0.5"
+        android:background="@drawable/letter_button"
+        android:text="A"
+        android:textSize="@dimen/letterbuttonanswertextsize"
+        android:visibility="invisible"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/first"
+        app:layout_constraintEnd_toStartOf="@+id/set2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/set2"
+        android:layout_width="@dimen/letterbuttonanswerheight"
+        android:layout_height="@dimen/letterbuttonanswerheight"
+        android:textSize="@dimen/letterbuttonanswertextsize"
+        android:background="@drawable/letter_button"
+        android:text="A"
+        android:alpha="0.5"
+        android:visibility="invisible"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/first"
+        app:layout_constraintEnd_toStartOf="@+id/set3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/set1" />
+
+    <Button
+        android:id="@+id/set3"
+        android:layout_width="@dimen/letterbuttonanswerheight"
+        android:layout_height="@dimen/letterbuttonanswerheight"
+        android:textSize="@dimen/letterbuttonanswertextsize"
+        android:background="@drawable/letter_button"
+        android:text="A"
+        android:alpha="0.5"
+        android:visibility="invisible"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/first"
+        app:layout_constraintEnd_toStartOf="@+id/set4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/set2"/>
+
+    <Button
+        android:id="@+id/set4"
+        android:layout_width="@dimen/letterbuttonanswerheight"
+        android:layout_height="@dimen/letterbuttonanswerheight"
+        android:textSize="@dimen/letterbuttonanswertextsize"
+        android:background="@drawable/letter_button"
+        android:text="A"
+        android:alpha="0.5"
+        android:visibility="invisible"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/first"
+        app:layout_constraintEnd_toStartOf="@+id/set5"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/set3"/>
+
+    <Button
+        android:id="@+id/set5"
+        android:layout_width="@dimen/letterbuttonanswerheight"
+        android:layout_height="@dimen/letterbuttonanswerheight"
+        android:textSize="@dimen/letterbuttonanswertextsize"
+        android:background="@drawable/letter_button"
+        android:text="A"
+        android:alpha="0.5"
+        android:visibility="invisible"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/first"
+        app:layout_constraintEnd_toStartOf="@+id/set6"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/set4"/>
+
+    <Button
+        android:id="@+id/set6"
+        android:layout_width="@dimen/letterbuttonanswerheight"
+        android:layout_height="@dimen/letterbuttonanswerheight"
+        android:textSize="@dimen/letterbuttonanswertextsize"
+        android:background="@drawable/letter_button"
+        android:text="A"
+        android:alpha="0.5"
+        android:visibility="invisible"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/first"
+        app:layout_constraintEnd_toStartOf="@+id/set7"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/set5"/>
+
+    <Button
+        android:id="@+id/set7"
+        android:layout_width="@dimen/letterbuttonanswerheight"
+        android:layout_height="@dimen/letterbuttonanswerheight"
+        android:textSize="@dimen/letterbuttonanswertextsize"
+        android:background="@drawable/letter_button"
+        android:text="A"
+        android:alpha="0.5"
+        android:visibility="invisible"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/first"
+        app:layout_constraintEnd_toStartOf="@+id/set8"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/set6"/>
+
+    <Button
+        android:id="@+id/set8"
+        android:layout_width="@dimen/letterbuttonanswerheight"
+        android:layout_height="@dimen/letterbuttonanswerheight"
+        android:textSize="@dimen/letterbuttonanswertextsize"
+        android:background="@drawable/letter_button"
+        android:text="A"
+        android:alpha="0.5"
+        android:visibility="invisible"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/first"
+        app:layout_constraintEnd_toStartOf="@+id/set9"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/set7"/>
+
+    <Button
+        android:id="@+id/set9"
+        android:layout_width="@dimen/letterbuttonanswerheight"
+        android:layout_height="@dimen/letterbuttonanswerheight"
+        android:textSize="@dimen/letterbuttonanswertextsize"
+        android:background="@drawable/letter_button"
+        android:text="A"
+        android:alpha="0.5"
+        android:visibility="invisible"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/first"
+        app:layout_constraintEnd_toStartOf="@+id/set10"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/set8"/>
+
+    <Button
+        android:id="@+id/set10"
+        android:layout_width="@dimen/letterbuttonanswerheight"
+        android:layout_height="@dimen/letterbuttonanswerheight"
+        android:background="@drawable/letter_button"
+        android:text="A"
+        android:alpha="0.5"
+        android:textSize="@dimen/letterbuttonanswertextsize"
+        android:visibility="invisible"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/first"
+        app:layout_constraintEnd_toStartOf="@+id/set11"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/set9"/>
+
+    <Button
+        android:id="@+id/set11"
+        android:layout_width="@dimen/letterbuttonanswerheight"
+        android:layout_height="@dimen/letterbuttonanswerheight"
+        android:background="@drawable/letter_button"
+        android:text="A"
+        android:alpha="0.5"
+        android:textSize="@dimen/letterbuttonanswertextsize"
+        android:visibility="invisible"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/first"
+        app:layout_constraintEnd_toStartOf="@+id/set12"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/set10"/>
+
+    <Button
+        android:id="@+id/set12"
+        android:layout_width="@dimen/letterbuttonanswerheight"
+        android:layout_height="@dimen/letterbuttonanswerheight"
+        android:background="@drawable/letter_button"
+        android:text="A"
+        android:alpha="0.5"
+        android:textSize="@dimen/letterbuttonanswertextsize"
+        android:visibility="invisible"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/first"
+        app:layout_constraintEnd_toStartOf="@+id/set13"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/set11"/>
+
+    <Button
+        android:id="@+id/set13"
+        android:layout_width="@dimen/letterbuttonanswerheight"
+        android:layout_height="@dimen/letterbuttonanswerheight"
+        android:background="@drawable/letter_button"
+        android:text="A"
+        android:alpha="0.5"
+        android:textSize="@dimen/letterbuttonanswertextsize"
+        android:visibility="invisible"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/first"
+        app:layout_constraintEnd_toStartOf="@+id/set14"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/set12"/>
+
+    <Button
+        android:id="@+id/set14"
+        android:layout_width="@dimen/letterbuttonanswerheight"
+        android:layout_height="@dimen/letterbuttonanswerheight"
+        android:layout_marginEnd="@dimen/letterbuttonmarginright"
+        android:background="@drawable/letter_button"
+        android:text="A"
+        android:alpha="0.5"
+        android:textSize="@dimen/letterbuttonanswertextsize"
+        android:visibility="invisible"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/first"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/set13"/>
+
+    <Button
+        android:id="@+id/first"
+        android:layout_width="@dimen/letterbuttonheight"
+        android:layout_height="@dimen/letterbuttonheight"
+        android:layout_marginBottom="8sp"
+        android:layout_marginStart="@dimen/letterbuttonmarginleft"
+        android:background="@drawable/letter_button"
+        android:text="A"
+        android:textSize="@dimen/letterbuttontextsize"
+        app:layout_constraintBottom_toTopOf="@+id/first2"
+        app:layout_constraintEnd_toStartOf="@+id/first3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <Button
+        android:id="@+id/first14"
+        android:layout_width="@dimen/letterbuttonheight"
+        android:layout_height="@dimen/letterbuttonheight"
+        android:layout_marginBottom="@dimen/letterbuttonmargindown"
+        android:layout_marginEnd="@dimen/letterbuttonmarginright"
+        android:background="@drawable/letter_button"
+        android:text="A"
+        android:textSize="@dimen/letterbuttontextsize"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/first12" />
+
+    <Button
+        android:id="@+id/first13"
+        android:layout_width="@dimen/letterbuttonheight"
+        android:layout_height="@dimen/letterbuttonheight"
+        android:layout_marginBottom="8sp"
+        android:layout_marginEnd="@dimen/letterbuttonmarginright"
+        android:background="@drawable/letter_button"
+        android:text="A"
+        android:textSize="@dimen/letterbuttontextsize"
+        app:layout_constraintBottom_toTopOf="@+id/first14"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/first11" />
+
+    <Button
+        android:id="@+id/first12"
+        android:layout_width="@dimen/letterbuttonheight"
+        android:layout_height="@dimen/letterbuttonheight"
+        android:layout_marginBottom="@dimen/letterbuttonmargindown"
+        android:background="@drawable/letter_button"
+        android:text="A"
+        android:textSize="@dimen/letterbuttontextsize"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/first14"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/first10" />
+
+    <Button
+        android:id="@+id/first11"
+        android:layout_width="@dimen/letterbuttonheight"
+        android:layout_height="@dimen/letterbuttonheight"
+        android:layout_marginBottom="8sp"
+        android:background="@drawable/letter_button"
+        android:text="A"
+        android:textSize="@dimen/letterbuttontextsize"
+        app:layout_constraintBottom_toTopOf="@+id/first12"
+        app:layout_constraintEnd_toStartOf="@+id/first13"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/first9" />
+
+    <Button
+        android:id="@+id/first10"
+        android:layout_width="@dimen/letterbuttonheight"
+        android:layout_height="@dimen/letterbuttonheight"
+        android:layout_marginBottom="@dimen/letterbuttonmargindown"
+        android:background="@drawable/letter_button"
+        android:text="A"
+        android:textSize="@dimen/letterbuttontextsize"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/first12"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/first8" />
+
+    <Button
+        android:id="@+id/first9"
+        android:layout_width="@dimen/letterbuttonheight"
+        android:layout_height="@dimen/letterbuttonheight"
+        android:layout_marginBottom="8sp"
+        android:background="@drawable/letter_button"
+        android:text="A"
+        android:textSize="@dimen/letterbuttontextsize"
+        app:layout_constraintBottom_toTopOf="@+id/first10"
+        app:layout_constraintEnd_toStartOf="@+id/first11"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/first7" />
+
+    <Button
+        android:id="@+id/first8"
+        android:layout_width="@dimen/letterbuttonheight"
+        android:layout_height="@dimen/letterbuttonheight"
+        android:layout_marginBottom="@dimen/letterbuttonmargindown"
+        android:background="@drawable/letter_button"
+        android:text="A"
+        android:textSize="@dimen/letterbuttontextsize"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/first10"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/first6" />
+
+    <Button
+        android:id="@+id/first7"
+        android:layout_width="@dimen/letterbuttonheight"
+        android:layout_height="@dimen/letterbuttonheight"
+        android:layout_marginBottom="8sp"
+        android:background="@drawable/letter_button"
+        android:text="A"
+        android:textSize="@dimen/letterbuttontextsize"
+        app:layout_constraintBottom_toTopOf="@+id/first8"
+        app:layout_constraintEnd_toStartOf="@+id/first9"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/first5" />
+
+    <Button
+        android:id="@+id/first6"
+        android:layout_width="@dimen/letterbuttonheight"
+        android:layout_height="@dimen/letterbuttonheight"
+        android:layout_marginBottom="@dimen/letterbuttonmargindown"
+        android:background="@drawable/letter_button"
+        android:text="A"
+        android:textSize="@dimen/letterbuttontextsize"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/first8"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/first4" />
+
+    <Button
+        android:id="@+id/first5"
+        android:layout_width="@dimen/letterbuttonheight"
+        android:layout_height="@dimen/letterbuttonheight"
+        android:layout_marginBottom="8sp"
+        android:background="@drawable/letter_button"
+        android:text="A"
+        android:textSize="@dimen/letterbuttontextsize"
+        app:layout_constraintBottom_toTopOf="@+id/first6"
+        app:layout_constraintEnd_toStartOf="@+id/first7"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/first3" />
+
+    <Button
+        android:id="@+id/first4"
+        android:layout_width="@dimen/letterbuttonheight"
+        android:layout_height="@dimen/letterbuttonheight"
+        android:layout_marginBottom="@dimen/letterbuttonmargindown"
+        android:background="@drawable/letter_button"
+        android:text="A"
+        android:textSize="@dimen/letterbuttontextsize"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/first6"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/first2" />
+
+    <Button
+        android:id="@+id/first3"
+        android:layout_width="@dimen/letterbuttonheight"
+        android:layout_height="@dimen/letterbuttonheight"
+        android:layout_marginBottom="8sp"
+        android:background="@drawable/letter_button"
+        android:text="A"
+        android:textSize="@dimen/letterbuttontextsize"
+        app:layout_constraintBottom_toTopOf="@+id/first4"
+        app:layout_constraintEnd_toStartOf="@+id/first5"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/first" />
+
+    <Button
+        android:id="@+id/first2"
+        android:layout_width="@dimen/letterbuttonheight"
+        android:layout_height="@dimen/letterbuttonheight"
+        android:layout_marginBottom="@dimen/letterbuttonmargindown"
+        android:layout_marginStart="@dimen/letterbuttonmarginleft"
+        android:background="@drawable/letter_button"
+        android:text="A"
+        android:textSize="@dimen/letterbuttontextsize"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/first4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <Button
+        android:id="@+id/clueButton"
+        android:layout_width="@dimen/cluebuttonheight"
+        android:layout_height="@dimen/cluebuttonheight"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/clue_button"
+        android:text="?"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textSize="@dimen/cluebuttontextsize"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/questionImageView"
+        app:layout_constraintTop_toBottomOf="@+id/tvWhoIsThis" />
+
+    <ImageView
+        android:id="@+id/questionImageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="0sp"
+        android:layout_marginStart="0sp"
+        android:layout_marginTop="0sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/txtv_score"
+        android:layout_width="90sp"
+        android:layout_height="60sp"
+        android:alpha="0.8"
+        android:background="#ffffff"
+        android:elevation="4sp"
+        android:gravity="center"
+        android:text="5p"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvWhoIsThis"
+        android:layout_width="0dp"
+        android:layout_height="60sp"
+        android:alpha="0.8"
+        android:background="#ffffff"
+        android:elevation="4sp"
+        android:gravity="center_vertical|center_horizontal|center"
+        android:text="@string/label_whoIsThis"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        app:layout_constraintEnd_toStartOf="@+id/txtv_score"
+        app:layout_constraintStart_toEndOf="@+id/myPointsTextView"
+        app:layout_constraintTop_toTopOf="@+id/questionImageView" />
+
+    <TextView
+        android:id="@+id/myPointsTextView"
+        android:layout_width="70sp"
+        android:layout_height="60sp"
+        android:alpha="0.8"
+        android:background="#ffffff"
+        android:elevation="4sp"
+        android:gravity="center"
+        android:text="5p"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

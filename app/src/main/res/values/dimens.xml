@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ClueButtonValues. -->
+    <dimen name="cluebuttonheight">60sp</dimen>
+    <dimen name="cluebuttoncornerradius">32sp</dimen>
+    <dimen name="cluebuttonborderwidth">8sp</dimen>
+    <dimen name="cluebuttontextsize">40sp</dimen>
+    <!-- LetterButtonValues. -->
+    <dimen name="letterbuttonheight">40sp</dimen>
+    <dimen name="letterbuttoncornerradius">16sp</dimen>
+    <dimen name="letterbuttonborderwidth">4sp</dimen>
+    <dimen name="letterbuttontextsize">24sp</dimen>
+    <!-- LetterButtonAnswerValues. 5 letters -->
+    <dimen name="letterbuttonanswerheight">20sp</dimen>
+    <dimen name="letterbuttonanswercornerradius">4sp</dimen>
+    <dimen name="letterbuttonanswerborderwidth">1sp</dimen>
+    <dimen name="letterbuttonanswertextsize">12sp</dimen>
+    <!-- LetterButtonValues. The ones next to the border -->
+    <dimen name="letterbuttonmarginleft">32sp</dimen>
+    <dimen name="letterbuttonmarginright">32sp</dimen>
+    <dimen name="letterbuttonmargindown">24sp</dimen>
+    <dimen name="letterbuttonmarginimage">24sp</dimen>
+    <!-- LetterBorderValues. 5 letters -->
+    <dimen name="letterbuttonfivemarginleft">48sp</dimen>
+    <dimen name="letterbuttonfivemarginright">48sp</dimen>
+
+
+</resources>

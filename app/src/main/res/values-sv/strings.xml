@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">quiZZit</string>
+    <string name="label_whoIsThis">Vem är detta?</string>
+    <string name="descript_image_whoIsThis">bild</string>
+    <string name="text_add_new_question">Lägg till</string>
+    <string name="text_save">Spara</string>
+    <string name="text_delete">Radera</string>
+    <string name="label_maxScore">Högsta poäng:</string>
+    <string name="t_noPicture">Du måste välja en bild</string>
+    <string name="t_noAnwerOrQuestion">Du behöver fylla i både fråga och svar</string>
+    <string name="t_moreThenTenChars">Ditt svar kan inte vara mer än tio bokstäver</string>
+    <string name="image_inlist">Bild fråga</string>
+    <string name="hint_name">Namn</string>
+    <string name="hint_description">Beskrivning</string>
+    <string name="hint_Question">Fråga</string>
+    <string name="hint_Answer">Svar</string>
+    <string name="label_startNewGame">Börja nytt spel</string>
+    <string name="t_noBlankspaces">Inga mellanrum</string>
+</resources>

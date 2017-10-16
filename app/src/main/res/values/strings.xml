@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">quiZZit</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="label_startNewGame">START NEW GAME</string>
+    <string name="label_whoIsThis">Who is this?</string>
+    <string name="descript_image_whoIsThis">image</string>
+    <string name="text_add_new_question">Add</string>
+    <string name="text_save">Save</string>
+    <string name="text_delete">Delete</string>
+    <string name="label_maxScore">max score:</string>
+
+
+
+    <!--TOAST MESSEGES -->
+    <string name="t_noPicture">You have to choose a picture</string>
+    <string name="t_noAnwerOrQuestion">You have to fill in both question and answer</string>
+    <string name="t_noBlankspaces">No blank spaces</string>
+    <string name="t_moreThenTenChars">Your answer can"'"t be more than 10 characters</string>
+    <string name="image_inlist">Image question</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_description">Description</string>
+    <string name="hint_Question">Question</string>
+    <string name="hint_Answer">Answer</string>
+</resources>

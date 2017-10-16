@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3f51b5</color>
+    <color name="colorPrimaryDark">#303f9f</color>
+    <color name="colorAccent">#64dd17</color>
+
+    <color name="floatingbuttoncolor">#32cb00</color>
+    <color name="myblack">#000000</color>
+    <!-- LetterButtonColors. -->
+    <color name="letterbuttontextcolor">#37474f</color>
+    <color name="letterbuttonbackgroundcolor">#6ec6ff</color>
+    <color name="letterbuttonbordercolor">#2196f3</color>
+
+    <!-- LetterButtonColors. Green -->
+    <color name="letterbuttongreentextcolor">#37474f</color>
+    <color name="letterbuttongreenbackgroundcolor">#76ff03</color>
+    <color name="letterbuttongreenbordercolor">#32cb00</color>
+
+    <!-- ClueButtonColors. -->
+    <color name="cluebuttontextcolor">#37474f</color>
+    <color name="cluebuttonbackgroundcolor">#ffff72</color>
+    <color name="cluebuttonbordercolor">#c8b900</color>
+
+    <!-- ThemeColors. -->
+    <color name="questionlistbackgroundcolor">#2196f3</color>
+    <color name="questionlistforegroundcolor">#6ec6ff</color>
+    <color name="questionlistitemcolor">#eeeeee</color>
+</resources>
