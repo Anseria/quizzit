@@ -1,5 +1,6 @@
 package joneros.jenny.quizzit
 
+import android.util.Log
 import java.util.*
 
 
@@ -23,6 +24,8 @@ class GameController {
     val random = Random()
     var questions = emptyList<Question>()
     var question: Question? = Question(-1, "", "", "", -1)
+    val listOfIncorrectLetters = mutableListOf<Int>()
+    var amountOfTimesToSackLetters = 1
 
 
     var alphabet: ArrayList<Char> = arrayListOf('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z')
@@ -35,6 +38,8 @@ class GameController {
         selectedButtonsAsInts.clear()
         shuffledLetters.clear()
         positions.clear()
+        listOfIncorrectLetters.clear()
+        amountOfTimesToSackLetters = 1
     }
 
     fun getRidOfSpacesInAnswer(answer: String): String {
@@ -106,45 +111,35 @@ class GameController {
         return items
     }
 
-    fun whichClue(): Int {
-        var clueIndex = 10
-        when (points) {
-            5 -> {
-                if (selectedButtonsAsInts.size > 0) {
-                    clueIndex = 9
-                }
-            }
-            4 -> {
-                clueIndex = 8
-                if (selectedButtonsAsInts.size > 0) {
-                    clueIndex = 7
-                }
-            }
-            3 -> {
-                clueIndex = 6
-                if (selectedButtonsAsInts.size > 1) {
-                    clueIndex = 5
-                }
-            }
-            2 -> {
-                clueIndex = 4
-                if (selectedButtonsAsInts.size > 2) {
-                    clueIndex = 3
-                }
-            }
-            1 -> {
-                clueIndex = 2
-                if (selectedButtonsAsInts.size > 3) {
-                    clueIndex = 1
-                }
-            }
-            else -> print("otherwise")
+    fun weMustMoveLettersBack(): Boolean {
+        val cluesUsed = 5 - points
+        val timesToSack = timesToSackLetters(question!!.answer.length)
+        var tentativeAnswerLength = 0
+        var stillGuessing = true
+        if (timesToSack >= cluesUsed) {
+            stillGuessing = true
+        } else {
+            stillGuessing = false
+            tentativeAnswerLength = cluesUsed - timesToSack
         }
+        if(stillGuessing == true) {
+            tentativeAnswerLength = 0
+        }
+        if (selectedButtonsAsInts.size > tentativeAnswerLength) {
+            return true
+        }
+        else {
+            return false
+        }
+    }
+
+    fun whichClue(): Int {
+        val clueIndex = points
         points = points - 1
         return clueIndex
     }
 
-    fun identifyIncorrectLetters(): MutableList<Int> {
+    fun identifyIncorrectLetters() {
         val positionList = mutableListOf<Int>()
         for (i in 0..positions.size - 1) {
             positionList += positions[i]
@@ -152,7 +147,25 @@ class GameController {
         for (i in 0..getRidOfSpacesInAnswer(question!!.answer).length - 1) {
             positionList.removeAt(0)
         }
-        return positionList
+        listOfIncorrectLetters.addAll(positionList)
+    }
+
+    fun timesToSackLetters(answerLength: Int): Int {
+        var amount = 1
+        when (answerLength) {
+            1 -> amount = 4
+            2 -> amount = 4
+            3 -> amount = 3
+            4 -> amount = 2
+            else -> amount = 1
+        }
+        return amount
+    }
+
+    fun incorrectLettersToBeSacked(total: Int, answerLength: Int): Int {
+        val b = timesToSackLetters(answerLength)
+        val a = total / b
+        return a
     }
 
     fun identifyNonChosenLetters(): MutableList<Int> {

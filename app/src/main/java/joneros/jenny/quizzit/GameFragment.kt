@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.VISIBLE
@@ -34,7 +35,9 @@ class GameFragment : LifecycleFragment() {
     var groupKey: Int = 0
     var round = 0
     val arrayButtonsToPress = mutableListOf<Button>()
+    val isThePressButtonsMoving = mutableListOf<Boolean>()
     val arrayButtonsToSee = mutableListOf<Button>()
+    val isTheSeeButtonsMoving = mutableListOf<Boolean>()
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -45,11 +48,17 @@ class GameFragment : LifecycleFragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val ButtonPressCollection = arrayOf(first, first2, first3, first4, first5, first6, first7, first8, first9, first10, first11, first12, first13, first14)
-        val ButtonSeeCollection = arrayOf(set1, set2, set3, set4, set5, set6, set7, set8, set9, set10, set11, set12, set13, set14)
+        val buttonPressCollection = arrayOf(first, first2, first3, first4, first5, first6, first7, first8, first9, first10, first11, first12, first13, first14)
+        val buttonSeeCollection = arrayOf(set1, set2, set3, set4, set5, set6, set7, set8, set9, set10, set11, set12, set13, set14)
 
-        arrayButtonsToPress.addAll(ButtonPressCollection)
-        arrayButtonsToSee.addAll(ButtonSeeCollection)
+        arrayButtonsToPress.addAll(buttonPressCollection)
+        arrayButtonsToSee.addAll(buttonSeeCollection)
+        for (i in 0..arrayButtonsToPress.size - 1) {
+            isThePressButtonsMoving.add(false)
+        }
+        for (i in 0..arrayButtonsToSee.size - 1) {
+            isTheSeeButtonsMoving.add(false)
+        }
 
         val questionViewModel = ViewModelProviders.of(activity).get(QuestionViewModel::class.java)
         groupKey = arguments.getInt("groupId")
@@ -73,6 +82,7 @@ class GameFragment : LifecycleFragment() {
         for (i in 0..arrayButtonsToSee.size - 1) {
             arrayButtonsToSee[i].visibility = View.INVISIBLE
             arrayButtonsToSee[i].background = ContextCompat.getDrawable(context, R.drawable.letter_button)
+            arrayButtonsToSee[i].alpha = 0.5f
             arrayButtonsToSee[i].translationY = 0f
         }
     }
@@ -100,7 +110,8 @@ class GameFragment : LifecycleFragment() {
                         val updatedGroup = Group(groupKey, group.name, gamecontroller.score, group.description)
                         groupViewModel.saveGroup(updatedGroup)
                     }
-                    Handler().postDelayed({ fragmentManager.popBackStack() }, 1000)
+                    Handler().postDelayed({
+                        fragmentManager.popBackStack() }, 1500)
                 })
             }
             txtv_score.text = gamecontroller.score.toString() + "p"
@@ -113,7 +124,10 @@ class GameFragment : LifecycleFragment() {
 
     fun letTheButtonsJump() {
         val amountOfLetters = gamecontroller.question!!.answer.length - 1
-        val delayLength = 400 / amountOfLetters
+        val delayLength = 200
+        if (amountOfLetters != 0) {
+            400 / amountOfLetters
+        }
         for (i in 0..amountOfLetters) {
             val a = i * delayLength.toLong()
             arrayButtonsToSee[i].animate()
@@ -137,6 +151,8 @@ class GameFragment : LifecycleFragment() {
     fun setNewQuestion(): Unit {
         gamecontroller.getNewQuestion()
         arrayOfLetters = gamecontroller.getLetters()
+        gamecontroller.identifyIncorrectLetters()
+        gamecontroller.timesToSackLetters(gamecontroller.question!!.answer.length)
         myPointsTextView.text = gamecontroller.points.toString() + "p"
         val questionViewModel = ViewModelProviders.of(activity).get(QuestionViewModel::class.java)
         questionViewModel.openBitmap(gamecontroller.question!!.image).observe(this, Observer {
@@ -175,13 +191,55 @@ class GameFragment : LifecycleFragment() {
                     }
 
                     override fun onAnimationEnd(p0: Animator?) {
-                        if (number == -1) {
-                            removeIncorrectLetters()
-                        } else if (number == -2) {
-                            giveCorrectAnswer()
-                        } else {
-                            giveLetter(number)
-                        }
+                        giveLetter(number)
+                    }
+
+                    override fun onAnimationCancel(p0: Animator?) {
+                    }
+
+                    override fun onAnimationStart(p0: Animator?) {
+                    }
+                })
+    }
+
+    fun removeIncorrectLettersAfterMovingButton() {
+        myPointsTextView.animate()
+                .alpha(1f)
+                .setInterpolator(object : TimeInterpolator {
+                    override fun getInterpolation(p0: Float): Float {
+                        return Math.sin(p0 * Math.PI / 2).toFloat()
+                    }
+                })
+                .setListener(object : Animator.AnimatorListener {
+                    override fun onAnimationRepeat(p0: Animator?) {
+                    }
+
+                    override fun onAnimationEnd(p0: Animator?) {
+                        removeIncorrectLetters()
+                    }
+
+                    override fun onAnimationCancel(p0: Animator?) {
+                    }
+
+                    override fun onAnimationStart(p0: Animator?) {
+                    }
+                })
+    }
+
+    fun giveCorrectAnswerAfterMovingButton(startLetter: Int) {
+        myPointsTextView.animate()
+                .alpha(1f)
+                .setInterpolator(object : TimeInterpolator {
+                    override fun getInterpolation(p0: Float): Float {
+                        return Math.sin(p0 * Math.PI / 2).toFloat()
+                    }
+                })
+                .setListener(object : Animator.AnimatorListener {
+                    override fun onAnimationRepeat(p0: Animator?) {
+                    }
+
+                    override fun onAnimationEnd(p0: Animator?) {
+                        giveCorrectAnswer(startLetter)
                     }
 
                     override fun onAnimationCancel(p0: Animator?) {
@@ -193,50 +251,42 @@ class GameFragment : LifecycleFragment() {
     }
 
     fun prepareToGiveClue() {
+        val mustMoveBack = gamecontroller.weMustMoveLettersBack()
         val clueIndex = gamecontroller.whichClue()
+        val lengthOfAnswer = gamecontroller.question!!.answer.length
+        val timesToSackLetters = gamecontroller.timesToSackLetters(lengthOfAnswer)
         myPointsTextView.text = gamecontroller.points.toString() + "p"
-        when (clueIndex) {
-            10 -> {
-                removeIncorrectLetters()
+        var lettersMovingBack = 0
+        if ((5 - clueIndex) - timesToSackLetters > 0) {
+            lettersMovingBack = (5 - clueIndex) - timesToSackLetters
+        }
+        val amountOfLettersGivenWhenGivingWholeAnswer = 4 - timesToSackLetters
+        if (clueIndex == 1 && !mustMoveBack) {
+            giveCorrectAnswer(amountOfLettersGivenWhenGivingWholeAnswer)
+        } else if (clueIndex == 1 && mustMoveBack) {
+            moveButtonBack(lettersMovingBack)
+            giveCorrectAnswerAfterMovingButton(amountOfLettersGivenWhenGivingWholeAnswer)
+        } else {
+            if (5 - clueIndex < timesToSackLetters) {
+                if (!mustMoveBack) {
+                    removeIncorrectLetters()
+                } else {
+                    moveButtonBack(lettersMovingBack)
+                    removeIncorrectLettersAfterMovingButton()
+                }
+            } else {
+                if (!mustMoveBack) {
+                    giveLetter((5 - clueIndex) - timesToSackLetters)
+                } else {
+                    moveButtonBack(lettersMovingBack)
+                    giveClueAfterMovingButton((5 - clueIndex) - timesToSackLetters)
+                }
             }
-            9 -> {
-                moveButtonBack(0)
-                giveClueAfterMovingButton(-1)
-            }
-            8 -> {
-                giveLetter(0)
-            }
-            7 -> {
-                moveButtonBack(0)
-                giveClueAfterMovingButton(0)
-            }
-            6 -> {
-                giveLetter(1)
-            }
-            5 -> {
-                moveButtonBack(1)
-                giveClueAfterMovingButton(1)
-            }
-            4 -> {
-                giveLetter(2)
-            }
-            3 -> {
-                moveButtonBack(2)
-                giveClueAfterMovingButton(2)
-            }
-            2 -> {
-                giveCorrectAnswer()
-            }
-            1 -> {
-                moveButtonBack(3)
-                giveCorrectAnswer()
-            }
-            else -> print("fel")
         }
     }
 
-    private fun giveCorrectAnswer() {
-        for (i in 3..gamecontroller.question!!.answer.length - 1) {
+    private fun giveCorrectAnswer(startLetter: Int) {
+        for (i in startLetter..gamecontroller.question!!.answer.length - 1) {
             giveLetter(i)
             clueButton.setOnClickListener(null)
         }
@@ -248,9 +298,15 @@ class GameFragment : LifecycleFragment() {
     }
 
     fun removeIncorrectLetters() {
-        val incorrectLetters = gamecontroller.identifyIncorrectLetters()
-        for (i in 0..incorrectLetters.size - 1) {
+        val incorrectLetters = gamecontroller.listOfIncorrectLetters
+        val lengthOfAnswer = gamecontroller.question!!.answer.length
+        val totalAmountOfIncorrectLetters = gamecontroller.listOfIncorrectLetters.size - 1
+        val a = gamecontroller.incorrectLettersToBeSacked(totalAmountOfIncorrectLetters, lengthOfAnswer)
+        for (i in 0..a) {
             sackButton(arrayButtonsToPress[incorrectLetters[i]])
+        }
+        for (i in 0..a) {
+            gamecontroller.listOfIncorrectLetters.removeAt(a - i)
         }
     }
 
@@ -305,7 +361,7 @@ class GameFragment : LifecycleFragment() {
     fun animateButtonUp(buttonNumber: Int, targetButtonNumber: Int, isClue: Boolean) {
         val view = arrayButtonsToPress[buttonNumber]
         val targetView = arrayButtonsToSee[targetButtonNumber]
-
+        isThePressButtonsMoving[buttonNumber] = true
         view.animate()
                 .translationX(targetView.x - view.x - targetView.width / 2)
                 .translationY(targetView.y - view.y - targetView.height / 2)
@@ -322,6 +378,7 @@ class GameFragment : LifecycleFragment() {
 
                     override fun onAnimationEnd(p0: Animator?) {
 
+                        isThePressButtonsMoving[buttonNumber] = false
                         view.visibility = View.INVISIBLE
                         view.translationX = 0f
                         view.translationY = 0f
@@ -337,7 +394,7 @@ class GameFragment : LifecycleFragment() {
                         } else {
                             targetView.background = ContextCompat.getDrawable(context, R.drawable.letter_button)
                         }
-                        if (targetButtonNumber == gamecontroller.question!!.answer.length-1) {
+                        if (targetButtonNumber == gamecontroller.question!!.answer.length - 1) {
                             checkAnswer()
                         }
                     }
@@ -353,7 +410,7 @@ class GameFragment : LifecycleFragment() {
     fun animateButtonDown(buttonNumber: Int, targetButtonNumber: Int) {
         val view = arrayButtonsToSee[buttonNumber]
         val targetView = arrayButtonsToPress[targetButtonNumber]
-
+        isThePressButtonsMoving[targetButtonNumber] = true
         view.background = ContextCompat.getDrawable(context, R.drawable.letter_button_shadow)
         view.text = ""
         view.alpha = 0f
@@ -386,6 +443,7 @@ class GameFragment : LifecycleFragment() {
                     }
 
                     override fun onAnimationEnd(p0: Animator?) {
+                        isThePressButtonsMoving[targetButtonNumber] = false
                     }
 
                     override fun onAnimationCancel(p0: Animator?) {
@@ -415,18 +473,43 @@ class GameFragment : LifecycleFragment() {
 
     fun setListeners() {
         for (i in 0..arrayButtonsToPress.size - 1) {
-            arrayButtonsToPress[i].setOnClickListener { moveButton(i, false) }
+            arrayButtonsToPress[i].setOnClickListener {
+                if (!isAnyOfTheButtonsMoving()) {
+                    moveButton(i, false)
+                }
+            }
         }
         for (i in 0..arrayButtonsToSee.size - 1) {
-            arrayButtonsToSee[i].setOnClickListener { moveButtonBack(i) }
+            arrayButtonsToSee[i].setOnClickListener {
+                if (!isAnyOfTheButtonsMoving()) {
+                    moveButtonBack(i)
+                }
+            }
         }
-
-        clueButton.setOnClickListener { prepareToGiveClue() }
+        clueButton.setOnClickListener {
+            if (!isAnyOfTheButtonsMoving()) {
+                prepareToGiveClue()
+            }
+        }
     }
 
     fun setLetters() {
         for (i in 0..arrayButtonsToPress.size - 1) {
             arrayButtonsToPress[i].text = arrayOfLetters!![i].toString()
         }
+    }
+
+    fun isAnyOfTheButtonsMoving(): Boolean {
+        var isMoving = false
+        for (i in 0..isThePressButtonsMoving.size - 1) {
+            if (isThePressButtonsMoving[i] == true) {
+                return true
+            }
+        }
+        for (i in 0..isTheSeeButtonsMoving.size - 1) {
+            if (isTheSeeButtonsMoving[i] == true)
+                return true
+        }
+        return false
     }
 }
