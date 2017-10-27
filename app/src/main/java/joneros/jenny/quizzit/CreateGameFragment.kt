@@ -146,7 +146,6 @@ class CreateGameFragment : Fragment() {
                     .replace(R.id.activityMain_containerLayout, newQuestionFragment)
                     .addToBackStack(null)
                     .commit()
-
         }
 
         var questionKey = -1

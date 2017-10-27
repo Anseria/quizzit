@@ -100,7 +100,7 @@ class GameFragment : LifecycleFragment() {
                         val updatedGroup = Group(groupKey, group.name, gamecontroller.score, group.description)
                         groupViewModel.saveGroup(updatedGroup)
                     }
-                    fragmentManager.popBackStack()
+                    Handler().postDelayed({ fragmentManager.popBackStack() }, 1000)
                 })
             }
             txtv_score.text = gamecontroller.score.toString() + "p"
@@ -337,8 +337,7 @@ class GameFragment : LifecycleFragment() {
                         } else {
                             targetView.background = ContextCompat.getDrawable(context, R.drawable.letter_button)
                         }
-                        if (gamecontroller.selectedButtonsAsInts.size - 1 == gamecontroller
-                                .getRidOfSpacesInAnswer(gamecontroller.question!!.answer).length - 1) {
+                        if (targetButtonNumber == gamecontroller.question!!.answer.length-1) {
                             checkAnswer()
                         }
                     }

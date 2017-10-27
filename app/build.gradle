@@ -8,11 +8,11 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    buildToolsVersion "26.0.2"
     defaultConfig {
         applicationId "joneros.jenny.quizzit"
         minSdkVersion 23
-        targetSdkVersion 26
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -23,11 +23,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors {
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
@@ -37,8 +39,7 @@ dependencies {
     implementation 'android.arch.lifecycle:extensions:1.0.0-alpha9-1'
     kapt "android.arch.lifecycle:compiler:1.0.0-alpha9-1"
     implementation 'com.android.support:recyclerview-v7:26.1.0'
-
-    implementation "android.arch.persistence.room:runtime:1.0.0-alpha9-1"
+    implementation 'android.arch.persistence.room:runtime:1.0.0-alpha9-1'
     kapt "android.arch.persistence.room:compiler:1.0.0-alpha9-1"
     implementation 'com.android.support:design:26.1.0'
 }
