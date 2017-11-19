@@ -6,7 +6,7 @@ import android.arch.persistence.room.RoomDatabase
 /**
  * Created by Jenny on 2017-09-28.
  */
-@Database(entities = arrayOf(Group::class, Question::class), version = 3)
+@Database(entities = arrayOf(Group::class, Question::class), version = 5)
 
 abstract class MyDatabase : RoomDatabase() {
     abstract fun groupDao(): GroupDao

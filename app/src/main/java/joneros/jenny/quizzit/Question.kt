@@ -12,7 +12,7 @@ import java.util.concurrent.Executor
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-@Entity(tableName = "questionlist")
+@Entity(tableName = "questionlista")
 data class Question(@PrimaryKey(autoGenerate = true) val key: Int,
                     val question: String,
                     val answer: String,
@@ -21,13 +21,13 @@ data class Question(@PrimaryKey(autoGenerate = true) val key: Int,
 
 @Dao
 interface QuestionDao {
-    @Query("SELECT key, question, answer, image, groupname FROM questionlist")
+    @Query("SELECT key, question, answer, image, groupname FROM questionlista")
     fun loadAllQuestions(): LiveData<List<Question>>
 
-    @Query("SELECT key, question, answer, image, groupname FROM questionlist WHERE key = :key")
+    @Query("SELECT key, question, answer, image, groupname FROM questionlista WHERE key = :key")
     fun loadQuestion(key: Int): LiveData<Question>
 
-    @Query("SELECT key, question, answer, image, groupname FROM questionlist WHERE groupname = :groupname")
+    @Query("SELECT key, question, answer, image, groupname FROM questionlista WHERE groupname = :groupname")
     fun loadQuestionsByGroup(groupname: Int): LiveData<List<Question>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -50,7 +50,7 @@ class QuestionViewModel(application: Application) : AndroidViewModel(application
     init {
         val database = Room
                 .databaseBuilder(application, MyDatabase::class.java,
-                        "questionlist.db")
+                        "questionlista.db")
                 .build()
         questionsDao = database.questionDao()
         allQuestions = questionsDao.loadAllQuestions()

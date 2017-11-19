@@ -11,7 +11,7 @@ import java.util.concurrent.Executors
 /**
  * Created by Jenny on 2017-09-22.
  */
-@Entity(tableName = "grouplist")
+@Entity(tableName = "grouplista")
 data class Group(@PrimaryKey(autoGenerate = true) val key: Int,
                  val name: String,
                  val max_score: Int,
@@ -19,10 +19,10 @@ data class Group(@PrimaryKey(autoGenerate = true) val key: Int,
 
 @Dao
 interface GroupDao {
-    @Query("SELECT key, name, max_score, description FROM grouplist")
+    @Query("SELECT key, name, max_score, description FROM grouplista")
     fun loadAllGroups(): LiveData<List<Group>>
 
-    @Query("SELECT key, name, max_score, description FROM grouplist WHERE key = :key")
+    @Query("SELECT key, name, max_score, description FROM grouplista WHERE key = :key")
     fun loadGroup(key: Int): LiveData<Group>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -44,7 +44,7 @@ class GroupViewModel(application: Application) : AndroidViewModel(application) {
     init {
         val database = Room
                 .databaseBuilder(application, MyDatabase::class.java,
-                        "grouplist.db")
+                        "grouplista.db")
                 .build()
         groupsDao = database.groupDao()
         allGroups = groupsDao.loadAllGroups()

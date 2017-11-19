@@ -1,0 +1,107 @@
+{
+  "project_info": {
+    "project_number": "511970075389",
+    "firebase_url": "https://androidquizjennythomas.firebaseio.com",
+    "project_id": "androidquizjennythomas",
+    "storage_bucket": "androidquizjennythomas.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:511970075389:android:74283cd57c5edd36",
+        "android_client_info": {
+          "package_name": "com.example.jenny.androidjennythomas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "511970075389-m4ons0phva9of91qmupfdkbcuq3d42th.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.jenny.androidjennythomas",
+            "certificate_hash": "f3759b82bf8aa2d1743c07d557fc513eb7488eab"
+          }
+        },
+        {
+          "client_id": "511970075389-q4pd4ba6h7unp8bf7prc40rr5inlf73h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.jenny.androidjennythomas",
+            "certificate_hash": "c3e661f04aecce3d674b1c5e794e34c3362169da"
+          }
+        },
+        {
+          "client_id": "511970075389-s3ngoaqt46sghd19ale4cvrtrrahj46o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1np8o2IWVFh-9313trSZRXcw9vCAsI4U"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "511970075389-s3ngoaqt46sghd19ale4cvrtrrahj46o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:511970075389:android:0038e2560a73b3ac",
+        "android_client_info": {
+          "package_name": "joneros.jenny.quizzit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "511970075389-o7gg7mbh5417eu33jgpjtfp5pbh508sl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "joneros.jenny.quizzit",
+            "certificate_hash": "f3759b82bf8aa2d1743c07d557fc513eb7488eab"
+          }
+        },
+        {
+          "client_id": "511970075389-s3ngoaqt46sghd19ale4cvrtrrahj46o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1np8o2IWVFh-9313trSZRXcw9vCAsI4U"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "511970075389-s3ngoaqt46sghd19ale4cvrtrrahj46o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

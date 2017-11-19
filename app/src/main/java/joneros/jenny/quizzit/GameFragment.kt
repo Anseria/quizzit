@@ -106,11 +106,11 @@ class GameFragment : LifecycleFragment() {
                     var group: Group = it!!
                     val testScore = gamecontroller.score.toString()
                     Toast.makeText(activity, testScore, Toast.LENGTH_SHORT).show()
-                    if (group.max_score < gamecontroller.score) {
-                        val updatedGroup = Group(groupKey, group.name, gamecontroller.score, group.description)
-                        groupViewModel.saveGroup(updatedGroup)
-                    }
                     Handler().postDelayed({
+                        if (group.max_score < gamecontroller.score) {
+                            val updatedGroup = Group(groupKey, group.name, gamecontroller.score, group.description)
+                            groupViewModel.saveGroup(updatedGroup)
+                        }
                         fragmentManager.popBackStack() }, 1500)
                 })
             }
