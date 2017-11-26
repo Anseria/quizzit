@@ -32,8 +32,9 @@ class NewQuestionFragment : Fragment() {
     var savePhoto: Bitmap? = null
     var questionKey = 0
     var groupId = 0
+    var FBid = ""
     var groupFBid = ""
-    var question = Question(0, "", "", "", 0, "")
+    var question = Question(0, "", "", "", "", 0, "")
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
@@ -46,6 +47,7 @@ class NewQuestionFragment : Fragment() {
         var viewModelQ = ViewModelProviders.of(activity).get(QuestionViewModel::class.java)
         groupId = arguments.getInt("groupId")
         groupFBid = ""
+        FBid = ""
         questionKey = arguments.getInt("questionKey")
 
         viewModelQ.loadQuestion(questionKey).observe(this, Observer {
@@ -76,7 +78,7 @@ class NewQuestionFragment : Fragment() {
                         if (etxt_answer.text.toString().toCharArray().size <= 14) {
                             val questiontype = etxt_questionType.text.toString()
                             val answer = etxt_answer.text.toString()
-                            val updatedQuestion = Question(questionKey, questiontype, answer, savePhoto.toString()!!, groupId, groupFBid)
+                            val updatedQuestion = Question(questionKey, FBid, questiontype, answer, savePhoto.toString()!!, groupId, groupFBid)
                             viewModelQ.saveQuestion(updatedQuestion, savePhoto!!)
                             fragmentManager.popBackStack()
                         } else {

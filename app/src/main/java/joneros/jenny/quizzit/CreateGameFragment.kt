@@ -27,8 +27,9 @@ class CreateGameFragment : Fragment() {
     }
 
     var groupKey: Int = 0
-    var group = Group(0, "", 0, "", "")
+    var group = Group(0,"", "", 0, "", "")
     var questions = emptyList<Question>()
+    var groupFBid = ""
     var userFBid = ""
     var mAuth : FirebaseAuth? = null
 
@@ -59,8 +60,9 @@ class CreateGameFragment : Fragment() {
             btn_addNewQuestion.visibility = View.INVISIBLE
         }
         viewModel.loadGroup(groupId).observe(this, Observer {
-            group = it ?: Group(0, "", 0, "", "")
+            group = it ?: Group(0,"", "", 0, "", "")
             groupKey = group.key
+            groupFBid = group.FBid
             etxt_groupName.text.clear()
             etxt_groupName.text.append(group.name)
             etxt_description.text.clear()
@@ -90,13 +92,12 @@ class CreateGameFragment : Fragment() {
         btn_saveGroup.setOnClickListener {
             val groupName = etxt_groupName.text.toString()
             val groupDescription = etxt_description.text.toString()
-            val updatedGroup = Group(groupKey, groupName, 0, groupDescription, userFBid)
+            val updatedGroup = Group(groupKey, groupFBid, groupName, 0, groupDescription, userFBid)
             viewModel.saveGroup(updatedGroup)
             fragmentManager.popBackStack()
         }
 
         btn_shareGroup.setOnClickListener {
-            
         }
 
         btn_deleteGroup.setOnClickListener {

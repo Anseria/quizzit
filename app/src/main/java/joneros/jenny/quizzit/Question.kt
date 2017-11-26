@@ -14,6 +14,7 @@ import java.util.concurrent.Executors
 
 @Entity(tableName = "questionlista")
 data class Question(@PrimaryKey(autoGenerate = true) val key: Int,
+                    val FBid: String,
                     val question: String,
                     val answer: String,
                     val image: String,
@@ -22,13 +23,13 @@ data class Question(@PrimaryKey(autoGenerate = true) val key: Int,
 
 @Dao
 interface QuestionDao {
-    @Query("SELECT key, question, answer, image, groupname, groupFBid FROM questionlista")
+    @Query("SELECT key, FBid, question, answer, image, groupname, groupFBid FROM questionlista")
     fun loadAllQuestions(): LiveData<List<Question>>
 
-    @Query("SELECT key, question, answer, image, groupname, groupFBid FROM questionlista WHERE key = :key")
+    @Query("SELECT key, FBid, question, answer, image, groupname, groupFBid FROM questionlista WHERE key = :key")
     fun loadQuestion(key: Int): LiveData<Question>
 
-    @Query("SELECT key, question, answer, image, groupname, groupFBid FROM questionlista WHERE groupname = :groupname")
+    @Query("SELECT key, FBid, question, answer, image, groupname, groupFBid FROM questionlista WHERE groupname = :groupname")
     fun loadQuestionsByGroup(groupname: Int): LiveData<List<Question>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
