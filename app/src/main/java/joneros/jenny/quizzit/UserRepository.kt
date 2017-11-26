@@ -70,23 +70,16 @@ class UserRepository {
         return MediatorLiveData()
     }
 
-    fun saveUser(user: User): String {
+    fun saveUser(user: User) {
         val firebaseUser = FirebaseUser(user.name)
-        var idet = user.FBid
-        Log.d(TAG, "saving Contact $firebaseUser")
-        Log.d(TAG, "the id of the contact is $idet.")
         when (user.FBid) {
             "" -> {
-                val newRef = usersRef.push()
-                idet = usersRef.key
                 usersRef.push().setValue(firebaseUser).addOnCompleteListener {
-                    //contactsRef.child(contact.id).key
                     Log.d(TAG, "Completed; ${it.isSuccessful}")
                 }
             }
             else -> usersRef.child(user.FBid).setValue(firebaseUser)
         }
-        return idet
     }
 
     fun removeContact(user: User) {

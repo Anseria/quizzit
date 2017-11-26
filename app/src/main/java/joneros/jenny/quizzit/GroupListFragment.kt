@@ -10,16 +10,25 @@ import android.support.v4.app.FragmentActivity
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_group_list.*
+import kotlinx.android.synthetic.main.fragment_start.*
 import kotlinx.android.synthetic.main.group_item.*
 
 /**
  * A simple [Fragment] subclasskk.
  */
 class GroupListFragment : LifecycleFragment() {
+
+    companion object {
+        val TAG = "GroupListFragment"
+    }
+
+    var mAuth : FirebaseAuth? = null
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -60,6 +69,15 @@ class GroupListFragment : LifecycleFragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
+
+        mAuth = FirebaseAuth.getInstance()
+        if (mAuth?.currentUser == null) {
+            Log.d(TAG, "NOT SIGNED IN")
+        } else {
+            Log.d(TAG, "signed in, uid is ${mAuth!!.currentUser?.uid}")
+        }
+
+
         recView_groups.adapter = GroupAdapter()
         recView_groups.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
 

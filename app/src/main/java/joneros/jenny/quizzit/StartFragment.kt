@@ -14,10 +14,17 @@ import android.util.Log
 import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_group_list.*
 import kotlinx.android.synthetic.main.fragment_start.*
 import kotlinx.android.synthetic.main.group_item.*
-
+import android.widget.Toast
+import com.google.android.gms.tasks.Task
+import android.support.annotation.NonNull
+import android.R.attr.password
+import android.R.attr.password
 
 /**
  * A simple [Fragment] subclass.
@@ -28,7 +35,8 @@ class StartFragment : Fragment() {
         val TAG = "StartFragment"
     }
 
-    var userFBid = ""
+    //var userFBid = ""
+    var mAuth: FirebaseAuth? = null
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater!!.inflate(R.layout.fragment_start, container, false)
@@ -37,16 +45,27 @@ class StartFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        Log.d(TAG, "my FBid is $userFBid")
         playButton.isEnabled = false
 
-        val settingsViewModel = ViewModelProviders.of(activity).get(SettingsViewModel::class.java)
+        mAuth = FirebaseAuth.getInstance()
+        if (mAuth?.currentUser == null) {
+            Log.d(TAG, "going to loginfragment")
+            fragmentManager
+                    .beginTransaction()
+                    .replace(R.id.activityMain_containerLayout, LoginFragment())
+                    .commit()
+        } else {
+            playButton.isEnabled = true
+            Log.d(TAG, "signed in, uid is ${mAuth!!.currentUser?.uid}")
+
+        }
+
+        /*val settingsViewModel = ViewModelProviders.of(activity).get(SettingsViewModel::class.java)
         val usersViewModel = ViewModelProviders.of(activity).get(UserViewModel::class.java)
 
         settingsViewModel.allSettings.observe(this, Observer {
-            if(it?.userFBid == "" || it?.userFBid == null) {
-                val tempUser = User("","")
+            if (it?.userFBid == "" || it?.userFBid == null) {
+                val tempUser = User("", "")
                 val newFBid = usersViewModel.saveUserToFirebase(tempUser)
                 userFBid = newFBid
                 val newSettings = MySettings(userFBid)
@@ -59,15 +78,30 @@ class StartFragment : Fragment() {
                 Log.d(TAG, "my FBid bbb is ${it.userFBid}")
             }
             Log.d(TAG, "my FBid ccc is $userFBid")
-        })
+        })*/
 
-        playButton.setOnClickListener{
+        settingsButton.setOnClickListener {
+            fragmentManager
+                    .beginTransaction()
+                    .replace(R.id.activityMain_containerLayout, SetSettingsFragment())
+                    .addToBackStack(null)
+                    .commit()
+        }
+
+        playButton.setOnClickListener {
             fragmentManager
                     .beginTransaction()
                     .replace(R.id.activityMain_containerLayout, GroupListFragment())
                     .addToBackStack(null)
                     .commit()
         }
-    }
 
+        signoutButton.setOnClickListener{
+            mAuth?.signOut()
+            fragmentManager
+                    .beginTransaction()
+                    .replace(R.id.activityMain_containerLayout, LoginFragment())
+                    .commit()
+        }
+    }
 }// Required empty public constructor

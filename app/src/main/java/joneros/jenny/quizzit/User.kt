@@ -66,8 +66,8 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
         executor.execute { usersDao.removeUser(user) }
     }
 
-    fun saveUserToFirebase(user: User): String {
-        return userRepository.saveUser(user)
+    fun saveUserToFirebase(user: User) {
+        userRepository.saveUser(user)
     }
 
     fun loadUserFromFirebase(FBid: String) {
