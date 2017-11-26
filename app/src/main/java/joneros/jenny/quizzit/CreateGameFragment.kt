@@ -13,7 +13,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_create_game.*
+import kotlinx.android.synthetic.main.fragment_start.*
 
 /**
  * A simple [Fragment] subclass.
@@ -25,8 +27,10 @@ class CreateGameFragment : Fragment() {
     }
 
     var groupKey: Int = 0
-    var group = Group(0, "", 0, "")
+    var group = Group(0, "", 0, "", "")
     var questions = emptyList<Question>()
+    var userFBid = ""
+    var mAuth : FirebaseAuth? = null
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -35,6 +39,13 @@ class CreateGameFragment : Fragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        mAuth = FirebaseAuth.getInstance()
+        if (mAuth?.currentUser == null) {
+            userFBid = ""
+        } else {
+            userFBid = mAuth!!.currentUser!!.uid
+        }
 
         val questionViewModel = ViewModelProviders.of(activity).get(QuestionViewModel::class.java)
 
@@ -48,7 +59,7 @@ class CreateGameFragment : Fragment() {
             btn_addNewQuestion.visibility = View.INVISIBLE
         }
         viewModel.loadGroup(groupId).observe(this, Observer {
-            group = it ?: Group(0, "", 0, "")
+            group = it ?: Group(0, "", 0, "", "")
             groupKey = group.key
             etxt_groupName.text.clear()
             etxt_groupName.text.append(group.name)
@@ -79,9 +90,13 @@ class CreateGameFragment : Fragment() {
         btn_saveGroup.setOnClickListener {
             val groupName = etxt_groupName.text.toString()
             val groupDescription = etxt_description.text.toString()
-            val updatedGroup = Group(groupKey, groupName, 0, groupDescription)
+            val updatedGroup = Group(groupKey, groupName, 0, groupDescription, userFBid)
             viewModel.saveGroup(updatedGroup)
             fragmentManager.popBackStack()
+        }
+
+        btn_shareGroup.setOnClickListener {
+            
         }
 
         btn_deleteGroup.setOnClickListener {

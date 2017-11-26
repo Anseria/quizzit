@@ -17,4 +17,5 @@
     <string name="hint_Answer">Svar</string>
     <string name="label_startNewGame">Börja nytt spel</string>
     <string name="t_noBlankspaces">Inga mellanrum</string>
+    <string name="text_share">Dela</string>
 </resources>

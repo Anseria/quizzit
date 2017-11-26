@@ -17,17 +17,18 @@ data class Question(@PrimaryKey(autoGenerate = true) val key: Int,
                     val question: String,
                     val answer: String,
                     val image: String,
-                    val groupname: Int)
+                    val groupname: Int,
+                    val groupFBid: String)
 
 @Dao
 interface QuestionDao {
-    @Query("SELECT key, question, answer, image, groupname FROM questionlista")
+    @Query("SELECT key, question, answer, image, groupname, groupFBid FROM questionlista")
     fun loadAllQuestions(): LiveData<List<Question>>
 
-    @Query("SELECT key, question, answer, image, groupname FROM questionlista WHERE key = :key")
+    @Query("SELECT key, question, answer, image, groupname, groupFBid FROM questionlista WHERE key = :key")
     fun loadQuestion(key: Int): LiveData<Question>
 
-    @Query("SELECT key, question, answer, image, groupname FROM questionlista WHERE groupname = :groupname")
+    @Query("SELECT key, question, answer, image, groupname, groupFBid FROM questionlista WHERE groupname = :groupname")
     fun loadQuestionsByGroup(groupname: Int): LiveData<List<Question>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

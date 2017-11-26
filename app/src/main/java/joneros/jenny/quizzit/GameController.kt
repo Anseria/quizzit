@@ -23,7 +23,7 @@ class GameController {
     var currentQuestion = 0
     val random = Random()
     var questions = emptyList<Question>()
-    var question: Question? = Question(-1, "", "", "", -1)
+    var question: Question? = Question(-1, "", "", "", -1, "")
     val listOfIncorrectLetters = mutableListOf<Int>()
     var amountOfTimesToSackLetters = 1
 

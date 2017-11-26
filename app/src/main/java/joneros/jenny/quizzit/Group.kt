@@ -15,14 +15,15 @@ import java.util.concurrent.Executors
 data class Group(@PrimaryKey(autoGenerate = true) val key: Int,
                  val name: String,
                  val max_score: Int,
-                 val description: String)
+                 val description: String,
+                 val authorFBid: String)
 
 @Dao
 interface GroupDao {
-    @Query("SELECT key, name, max_score, description FROM grouplista")
+    @Query("SELECT key, name, max_score, description, authorFBid FROM grouplista")
     fun loadAllGroups(): LiveData<List<Group>>
 
-    @Query("SELECT key, name, max_score, description FROM grouplista WHERE key = :key")
+    @Query("SELECT key, name, max_score, description, authorFBid FROM grouplista WHERE key = :key")
     fun loadGroup(key: Int): LiveData<Group>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
