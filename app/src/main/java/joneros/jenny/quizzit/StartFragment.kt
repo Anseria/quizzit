@@ -96,7 +96,23 @@ class StartFragment : Fragment() {
                     .commit()
         }
 
-        signoutButton.setOnClickListener{
+        editButton.setOnClickListener {
+            fragmentManager
+                    .beginTransaction()
+                    .replace(R.id.activityMain_containerLayout, EditListFragment())
+                    .addToBackStack(null)
+                    .commit()
+        }
+
+        searchButton.setOnClickListener {
+            fragmentManager
+                    .beginTransaction()
+                    .replace(R.id.activityMain_containerLayout, SearchListFragment())
+                    .addToBackStack(null)
+                    .commit()
+        }
+
+        signoutButton.setOnClickListener {
             mAuth?.signOut()
             fragmentManager
                     .beginTransaction()

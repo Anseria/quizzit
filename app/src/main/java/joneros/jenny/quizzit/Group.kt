@@ -42,6 +42,8 @@ class GroupViewModel(application: Application) : AndroidViewModel(application) {
     val allGroups: LiveData<List<Group>>
     private val groupsDao: GroupDao
     private val executor: Executor = Executors.newCachedThreadPool()
+    val groupRepository = GroupRepository()
+    val allFirebaseGroups = groupRepository.allGroups
 
     init {
         val database = Room
@@ -50,11 +52,13 @@ class GroupViewModel(application: Application) : AndroidViewModel(application) {
                 .build()
         groupsDao = database.groupDao()
         allGroups = groupsDao.loadAllGroups()
+        groupRepository.startListening()
     }
 
     override fun onCleared() {
         super.onCleared()
         (executor as ExecutorService).shutdown()
+        groupRepository.stopListening()
     }
 
     fun loadGroup(key: Int): LiveData<Group> {
