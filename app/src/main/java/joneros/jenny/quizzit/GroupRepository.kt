@@ -11,11 +11,11 @@ import com.google.firebase.database.ValueEventListener
  * Created by thomas on 2017-11-26.
  */
 
-data class FirebaseGroup(val key: Int,
-                 val name: String,
-                 val max_score: Int,
-                 val description: String,
-                 val authorFBid: String)
+data class FirebaseGroup(val key: Int = 0,
+                         val name: String = "",
+                         val max_score: Int = 0,
+                         val description: String = "",
+                         val authorFBid: String = "")
 
 class GroupRepository {
 
@@ -33,6 +33,7 @@ class GroupRepository {
         }
 
         override fun onDataChange(snapshot: DataSnapshot?) {
+            Log.d(TAG, "the data is $snapshot")
             val latestGroups = snapshot?.children?.map {
                 val firebaseGroup = it.getValue(FirebaseGroup::class.java)
                 return@map Group(firebaseGroup?.key ?: 0,
@@ -40,7 +41,7 @@ class GroupRepository {
                         firebaseGroup?.name ?: "",
                         firebaseGroup?.max_score ?: 0,
                         firebaseGroup?.description ?: "",
-                        firebaseGroup?.authorFBid?: "")
+                        firebaseGroup?.authorFBid ?: "")
             } ?: emptyList()
 
             allGroups.postValue(latestGroups)
@@ -53,6 +54,56 @@ class GroupRepository {
 
     fun stopListening() {
         groupsRef.removeEventListener(valueEventListener)
+    }
+
+    fun loadAllGroupsExceptMyOwn(FBid: String): MediatorLiveData<List<Group>> {
+
+        val mediatorLiveData = MediatorLiveData<List<Any>>()
+        groupsRef.addValueEventListener(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError?) {
+                Log.d(TAG, "Error in Firebase communication")
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot?) {
+
+                val latestGroups = snapshot?.children?.map {
+                    val firebaseGroup = it.getValue(FirebaseGroup::class.java)
+                    if (firebaseGroup?.authorFBid == FBid) {}
+                    else {
+                        return@map Group(firebaseGroup?.key ?: 0,
+                                it.key,
+                                firebaseGroup?.name ?: "",
+                                firebaseGroup?.max_score ?: 0,
+                                firebaseGroup?.description ?: "",
+                                firebaseGroup?.authorFBid ?: "")
+                    }
+                } ?: emptyList()
+                Log.d(TAG, "latestgroups är $latestGroups")
+                mediatorLiveData.postValue(latestGroups)
+
+                /*val listOfFirebaseGroups = mutableListOf<Group>()
+                for (i in snapshot!!.children) {
+                    val firebaseGroup = i?.getValue(FirebaseGroup::class.java)
+                    if(firebaseGroup?.authorFBid != FBid) {
+                        val returningFirebaseGroup = Group(firebaseGroup?.key ?: 0,
+                                i.key ?: "",
+                                firebaseGroup?.name ?: "",
+                                firebaseGroup?.max_score ?: 0,
+                                firebaseGroup?.description ?: "",
+                                firebaseGroup?.authorFBid ?: "")
+                        Log.d(TAG, "firebasegroup is $returningFirebaseGroup")
+                        listOfFirebaseGroups.add(returningFirebaseGroup)
+                    }
+                }
+                val listOfGroup = listOf<Group>()
+
+                Log.d(TAG, "List of groups contains: $listOfFirebaseGroups")
+                mediatorLiveData.postValue(listOfFirebaseGroups)
+                Log.d(TAG, "mediator is $mediatorLiveData")*/
+            }
+        })
+        Log.d(TAG, "returning")
+        return MediatorLiveData()
     }
 
     fun loadGroup(FBid: String): MediatorLiveData<Group> {
@@ -76,14 +127,14 @@ class GroupRepository {
                 }
             })
         } else {
-            mediatorLiveData.postValue(Group(0,"", "", 0, "", ""))
+            mediatorLiveData.postValue(Group(0, "", "", 0, "", ""))
         }
 
         return MediatorLiveData()
     }
 
     fun saveGroup(group: Group): String {
-        val firebasegroup = FirebaseGroup(group.key,
+        val firebasegroup = FirebaseGroup(0,
                 group.name,
                 group.max_score,
                 group.description,

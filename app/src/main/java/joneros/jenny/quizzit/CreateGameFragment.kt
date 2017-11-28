@@ -16,6 +16,8 @@ import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_create_game.*
 import kotlinx.android.synthetic.main.fragment_start.*
+import java.util.concurrent.Executor
+import java.util.concurrent.Executors
 
 /**
  * A simple [Fragment] subclass.
@@ -32,6 +34,8 @@ class CreateGameFragment : Fragment() {
     var groupFBid = ""
     var userFBid = ""
     var mAuth : FirebaseAuth? = null
+
+    private val executor: Executor = Executors.newCachedThreadPool()
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -98,6 +102,17 @@ class CreateGameFragment : Fragment() {
         }
 
         btn_shareGroup.setOnClickListener {
+            val groupName = etxt_groupName.text.toString()
+            val groupDescription = etxt_description.text.toString()
+            val updatedGroup = Group(groupKey, groupFBid, groupName, 0, groupDescription, userFBid)
+            executor.execute {
+                val groupFBid = viewModel.saveFirebaseGroup(updatedGroup)
+                executor.execute {
+                    val newUpdatedGroup = updatedGroup.copy(FBid = groupFBid)
+                    viewModel.saveGroup(newUpdatedGroup)
+                    fragmentManager.popBackStack()
+                }
+            }
         }
 
         btn_deleteGroup.setOnClickListener {
@@ -136,8 +151,7 @@ class CreateGameFragment : Fragment() {
                 holder?.answer?.text = currentQuestion.answer
                 holder?.questionKey = currentQuestion.key
                 Log.d(TAG, "hejhej")
-            }
-            )
+            })
         }
     }
 

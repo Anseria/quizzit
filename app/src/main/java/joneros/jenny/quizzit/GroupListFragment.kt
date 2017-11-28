@@ -120,6 +120,7 @@ class GroupListFragment : LifecycleFragment() {
             holder?.groupName?.text = title
             holder?.groupId = group.key
             holder?.maxscore?.text = group.max_score.toString()
+            holder?.FBid = group.FBid
 
             if (editMode.editMode && groups.size != 0) {
                 holder?.editSign?.visibility = View.VISIBLE
@@ -133,11 +134,11 @@ class GroupListFragment : LifecycleFragment() {
         val groupName: TextView = itemView.findViewById(R.id.group_name)
         val maxscore: TextView = itemView.findViewById(R.id.group_maxScore)
         val editSign: ImageView = itemView.findViewById(R.id.item_edit_sign)
+        var FBid: String? = null
 
         init {
             itemView.setOnClickListener(this)
         }
-
         override fun onClick(view: View?) {
             if (!editMode.editMode) {
                 val gameFragment = GameFragment()

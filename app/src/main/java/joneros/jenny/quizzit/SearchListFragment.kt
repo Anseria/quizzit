@@ -33,6 +33,12 @@ import kotlinx.android.synthetic.main.fragment_search_list.*
  */
 class SearchListFragment : Fragment() {
 
+    companion object {
+        val TAG = "SearchListFragment"
+    }
+
+    var mAuth : FirebaseAuth? = null
+
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater!!.inflate(R.layout.fragment_search_list, container, false)
     }
@@ -40,19 +46,19 @@ class SearchListFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /*mAuth = FirebaseAuth.getInstance()
+        mAuth = FirebaseAuth.getInstance()
         if (mAuth?.currentUser == null) {
             Log.d(TAG, "NOT SIGNED IN")
         } else {
             Log.d(TAG, "signed in, uid is ${mAuth!!.currentUser?.uid}")
-        }*/
+        }
 
         searchListView.adapter = SearchGroupAdapter()
         searchListView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
 
         val viewModel = ViewModelProviders.of(activity).get(GroupViewModel::class.java)
 
-        viewModel.allGroups.observe(this, Observer {
+        viewModel.loadAllFirebaseGroups().observe(this, Observer {
             (searchListView.adapter as SearchGroupAdapter).groups = it ?: emptyList()
             searchListView.adapter.notifyDataSetChanged()
         })

@@ -72,4 +72,24 @@ class GroupViewModel(application: Application) : AndroidViewModel(application) {
     fun removeGroup(group: Group) {
         executor.execute { groupsDao.removeGroup(group) }
     }
+
+    fun loadAllFirebaseGroups(): LiveData<List<Group>> {
+        return allFirebaseGroups
+    }
+
+    fun loadAllFirebaseGroupsWhichAreNotCreatedByMe(FBid: String): LiveData<List<Group>> {
+        return groupRepository.loadAllGroupsExceptMyOwn(FBid)
+    }
+
+    fun loadFirebaseGroup(FBid: String): LiveData<Group> {
+        return groupRepository.loadGroup(FBid)
+    }
+
+    fun saveFirebaseGroup(group: Group): String {
+        return groupRepository.saveGroup(group)
+    }
+
+    fun removeFirebaseGroup(group: Group) {
+        groupRepository.removeGroup(group)
+    }
 }
